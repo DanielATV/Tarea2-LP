@@ -1,7 +1,6 @@
 #ifndef __lista_en_h__
 #define __lista_en_h__
 
-#include <stdlib.h>
 
 typedef struct elemento{
  int comienzo;
