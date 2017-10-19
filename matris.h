@@ -1,5 +1,5 @@
-#ifndef __lista_en_h__
-#define __lista_en_h__
+#ifndef __matris_h__
+#define __matris_h__
 
 
 typedef struct elemento{
