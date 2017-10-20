@@ -24,6 +24,42 @@ void* alloc_dispersa(int m, int n){
 
 	return (void *)pter;
 }
+
 void free_dispersa(void* A){
+	tNodo *pt;
+	tNodo *ptaux;
+	tNodo aux;
+	int n;
+	int i;
+
+	n = ((tMatris *)A)-> columnas;
+
+	
+
+	for (i = 0; i<n ; i++){
+
+		aux = (((tMatris *)A)->arreglo)[i];
+
+		pt = aux.sig;
+
+		if (pt == NULL) continue;
+
+		else{
+
+			while (pt != NULL){
+
+				ptaux = pt -> sig;
+				free(pt);
+				pt = ptaux;
+
+			}
+
+		}
+	}
+
+	free(((tMatris *)A)->arreglo);
+
+
+
 
 }
