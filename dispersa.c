@@ -123,7 +123,37 @@ int ingresar_valor(void* A, int i, int j, int valor){
 
 		
 		else{
-			return 0;
+
+			aux = (((tMatris *)A)->arreglo)[j];
+
+			ptaux = aux.sig;
+			ptaux2 = NULL;
+
+
+			while (ptaux != NULL){
+				if (ptaux->i == i && ptaux->j == j){
+
+					if (ptaux2 != NULL){
+						ptaux2->sig = ptaux->sig;
+						free(ptaux);
+					}
+
+					else{
+						((((tMatris *)A)->arreglo)[j]).sig = NULL;
+						free(ptaux);
+					}
+
+
+				}
+				else{
+
+					ptaux2 = ptaux;
+					ptaux = ptaux->sig;
+					return 0;
+
+				}
+
+			}
 		}
 	}
 
