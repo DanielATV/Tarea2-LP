@@ -14,7 +14,7 @@ void* alloc_dispersa(int m, int n){
 	pter = (tMatris *)malloc(sizeof(tMatris));
 	pt = (tNodo *)malloc(n*sizeof(tNodo));
 	pter->filas = m;
-	pter->filas = n;
+	pter->columnas = n;
 	pter->arreglo = pt;
 
 	for (i = 0; i < n; i++){
