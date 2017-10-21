@@ -100,7 +100,7 @@ int ingresar_valor(void* A, int i, int j, int valor){
 				while (ptaux != NULL){
 
 					if (ptaux->i == i && ptaux->j == j){
-						ptaux->valor == valor;
+						ptaux->valor = valor;
 						return 0;
 					}
 					else{
