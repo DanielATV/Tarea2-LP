@@ -136,11 +136,13 @@ int ingresar_valor(void* A, int i, int j, int valor){
 					if (ptaux2 != NULL){
 						ptaux2->sig = ptaux->sig;
 						free(ptaux);
+						return 0;
 					}
 
 					else{
 						((((tMatris *)A)->arreglo)[j]).sig = NULL;
 						free(ptaux);
+						return 0;
 					}
 
 
@@ -149,13 +151,15 @@ int ingresar_valor(void* A, int i, int j, int valor){
 
 					ptaux2 = ptaux;
 					ptaux = ptaux->sig;
-					return 0;
-
+	
 				}
 
 			}
 		}
 	}
 
+}
+
+void imprimir_matriz(void* A){
 
 }
