@@ -161,5 +161,40 @@ int ingresar_valor(void* A, int i, int j, int valor){
 }
 
 void imprimir_matriz(void* A){
+	tNodo *pt;
+	tNodo *ptaux;
+	tNodo aux;
+	int n,k;
+	int i,j,valor;
+
+	n = ((tMatris *)A)-> columnas;
+
+	
+
+	for (k = 0; k<n ; k++){
+
+		aux = (((tMatris *)A)->arreglo)[k];
+
+		pt = aux.sig;
+
+		if (pt == NULL) continue;
+
+		else{
+
+			while (pt != NULL){
+
+				i = pt-> i;
+				j = pt-> j;
+				valor = pt-> valor;
+
+				printf("(%d,%d) = %d\n",i,j,valor );
+
+				ptaux = pt -> sig;
+				pt = ptaux;
+
+			}
+
+		}
+	}
 
 }
