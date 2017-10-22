@@ -265,7 +265,7 @@ void* suma(void*A,void*B){
 						
 						}
 						ingresar_valor(resultado,pt->i,pt->j,pt->valor);
-						
+
 					}
 
 				}
@@ -278,7 +278,7 @@ void* suma(void*A,void*B){
 		}
 	}
 
-	imprimir_matriz(resultado);
+
 
 	return resultado;
 
