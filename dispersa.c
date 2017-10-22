@@ -2,7 +2,15 @@
 #include <stdlib.h>
 #include "matris.h"
 
+/******** Funcion: alloc_dispersa ********************
+Descripcion: Constructor de matrices, pide la memoria para la matriz y la inicializa.
 
+Parametros:
+m: entero.
+n: entero.
+
+Retorno: Puntero a void de la nueva matriz de dimension mxn.
+************************************************/
 
 void* alloc_dispersa(int m, int n){
 	tMatris *pter;
@@ -16,7 +24,8 @@ void* alloc_dispersa(int m, int n){
 	pter->filas = m;
 	pter->columnas = n;
 	pter->arreglo = pt;
-
+	
+	// Inicializa el arreglo de la matriz con un "dummy" en cada celda del arreglo.
 	for (i = 0; i < n; i++){
 		(pter->arreglo)[i] = aux;
 	}
@@ -24,6 +33,15 @@ void* alloc_dispersa(int m, int n){
 
 	return (void *)pter;
 }
+
+/******** Funcion: free_dispersa ********************
+Descripcion: Destructor de matrices, libera la memoria utilizada para la matriz.
+
+Parametros:
+A: void.
+
+Retorno: Notorna parametro.
+************************************************/
 
 void free_dispersa(void* A){
 	tNodo *pt;
@@ -33,8 +51,8 @@ void free_dispersa(void* A){
 	int i;
 
 	n = ((tMatris *)A)-> columnas;
-
 	
+	//Iteracion sobre las columnas.
 
 	for (i = 0; i<n ; i++){
 
@@ -45,7 +63,7 @@ void free_dispersa(void* A){
 		if (pt == NULL) continue;
 
 		else{
-
+			//Iteracion sobre las filas.
 			while (pt != NULL){
 
 				ptaux = pt -> sig;
@@ -58,15 +76,29 @@ void free_dispersa(void* A){
 	}
 
 	free(((tMatris *)A)->arreglo);
+	free(A);
 
 }
+
+/******** Funcion: ingresar_valor ********************
+Descripcion: Se ingresa un valor a la posicion dada de la matriz.
+
+Parametros:
+A: void.
+i: entero.
+j: entero.
+valor: entero.
+
+Retorno: Retorna 1 si no se efectuo la operacion y 0 en el caso contrario.
+************************************************/
 
 int ingresar_valor(void* A, int i, int j, int valor){
 	tNodo *pter;
 	tNodo *ptaux;
 	tNodo *ptaux2;
 	tNodo aux;
-
+	
+	//Caso de error.
 	if (i >= ((tMatris *)A)-> filas || j >= ((tMatris *)A)-> columnas){
 		printf("Fuera de las dimensiones de la matris\n");
 		return 1;
@@ -75,11 +107,12 @@ int ingresar_valor(void* A, int i, int j, int valor){
 
 	else{
 
-
+		//En el caso que el valor sea distinto de 0.
 		if (valor != 0){
 			
 			aux = (((tMatris *)A)->arreglo)[j];
-
+			
+			//En el caso que la columna este vacia agrega el nuevo elemento.
 			if (aux.sig == NULL){
 				pter = (tNodo *)malloc(sizeof(tNodo));
 				pter->i = i;
@@ -97,6 +130,8 @@ int ingresar_valor(void* A, int i, int j, int valor){
 				ptaux = aux.sig;
 				ptaux2 = ptaux;
 				
+				//Si ya existe cambia su valor.
+				
 				while (ptaux != NULL){
 
 					if (ptaux->i == i && ptaux->j == j){
@@ -110,6 +145,8 @@ int ingresar_valor(void* A, int i, int j, int valor){
 					} 
 
 				}
+				
+				//Si no existe lo agrega.
 				pter = (tNodo *)malloc(sizeof(tNodo));
 				pter->i = i;
 				pter->j = j;
@@ -121,7 +158,7 @@ int ingresar_valor(void* A, int i, int j, int valor){
 
 		}
 
-		
+		//Si el valor es 0.
 		else{
 
 			aux = (((tMatris *)A)->arreglo)[j];
@@ -132,13 +169,13 @@ int ingresar_valor(void* A, int i, int j, int valor){
 
 			while (ptaux != NULL){
 				if (ptaux->i == i && ptaux->j == j){
-
+					//Si lo encuentra lo elimina.
 					if (ptaux2 != NULL){
 						ptaux2->sig = ptaux->sig;
 						free(ptaux);
 						return 0;
 					}
-
+					//En el caso que sea el primer elemento de la columna.
 					else{
 						((((tMatris *)A)->arreglo)[j]).sig = NULL;
 						free(ptaux);
@@ -155,10 +192,21 @@ int ingresar_valor(void* A, int i, int j, int valor){
 				}
 
 			}
+			//Si no lo encuentra no hace nada.
+			return 0;
 		}
 	}
 
 }
+
+/******** Funcion: imprimir_matriz ********************
+Descripcion: Imprime por pantalla los elementos no nulos de la matriz de la forma (i,j) = valor.
+
+Parametros:
+A: void.
+
+Retorno: No retorna parametro.
+************************************************/
 
 void imprimir_matriz(void* A){
 	tNodo *pt;
@@ -170,7 +218,7 @@ void imprimir_matriz(void* A){
 	n = ((tMatris *)A)-> columnas;
 
 	
-
+	//Iteracion sobre las columnas.
 	for (k = 0; k<n ; k++){
 
 		aux = (((tMatris *)A)->arreglo)[k];
@@ -180,7 +228,7 @@ void imprimir_matriz(void* A){
 		if (pt == NULL) continue;
 
 		else{
-
+			//Iteracion sobre las filas.
 			while (pt != NULL){
 
 				i = pt-> i;
@@ -198,6 +246,16 @@ void imprimir_matriz(void* A){
 	}
 
 }
+
+/******** Funcion: suma ********************
+Descripcion: Suma dos matrices.
+
+Parametros:
+A: void.
+B: void.
+
+Retorno: Puntero a void con la matriz resultante luego de realizar la operacion.
+************************************************/
 
 void* suma(void*A,void*B){
 	void *resultado;
@@ -217,7 +275,8 @@ void* suma(void*A,void*B){
 
 	h = ((tMatris *)B)->filas;
 	l= ((tMatris *)B)->columnas;
-
+	
+	//Caso de error.
 	if (m != h || n != l){
 		printf("Error de dimensiones\n");
 		exit(0);
@@ -225,6 +284,7 @@ void* suma(void*A,void*B){
 
 	resultado = alloc_dispersa(m,n);
 
+	//Iteracion sobre las columnas.
 	for (k = 0; k<n ; k++){
 
 		aux = (((tMatris *)A)->arreglo)[k];
@@ -234,7 +294,7 @@ void* suma(void*A,void*B){
 		if (pt == NULL) continue;
 
 		else{
-
+			//Iteracion sobre las filas.
 			while (pt != NULL){
 
 
@@ -255,6 +315,16 @@ void* suma(void*A,void*B){
 
 }
 
+/******** Funcion: multiplicacion ********************
+Descripcion: Multiplica dos matrices.
+
+Parametros:
+A: void.
+B: void.
+
+Retorno: Puntero a void con la matriz resultante luego de realizar la operacion.
+************************************************/
+
 void* multiplicacion(void*A,void*B){
 	void *resultado;
 	int m,n;
@@ -269,18 +339,18 @@ void* multiplicacion(void*A,void*B){
 
 	h = ((tMatris *)B)->filas;
 	l= ((tMatris *)B)->columnas;
-
+	//Caso de error.
 	if (n != h){
 		printf("Error de dimensiones\n");
 		exit(0);
 	}
 
 	resultado = alloc_dispersa(m,l);
-
+	//Iteracion de las filas de la nueva matriz.
 	for (k = 0; k< m; k++){
-
+		//Iteracion de las columnas de la nueva matriz.
 		for (u = 0; u< l; u++){
-
+			//Iteracion de los elementos de A y B.
 			for(o = 0; o< h; o++){
 				valor = valor + encontrar_valor(A,k,o)*encontrar_valor(B,o, u);
 			}
@@ -294,6 +364,17 @@ void* multiplicacion(void*A,void*B){
 
 }
 
+/******** Funcion: binaria ********************
+Descripcion: Efectua una funcion binaria sobre dos matrices.
+
+Parametros:
+*fun(void,void): Puntero a funcion.
+A: void.
+B: void.
+
+Retorno: No retorna parametro.
+************************************************/
+
 void binaria(void* (*fun)(void*,void*), void* A, void* B){
 	void * c;
 
@@ -302,6 +383,15 @@ void binaria(void* (*fun)(void*,void*), void* A, void* B){
 	imprimir_matriz(c);
 	free_dispersa(c);
 }
+
+/******** Funcion: transponer ********************
+Descripcion: Transpone la matriz ingresada.
+
+Parametros:
+A: void.
+
+Retorno: Puntero a void con la matriz resultante luego de realizar la operacion.
+************************************************/
 
 void* transponer(void* A){
 	void * resultado;
@@ -315,7 +405,7 @@ void* transponer(void* A){
 	n = ((tMatris *)A)-> columnas;
 
 	resultado = alloc_dispersa(n,m);
-
+	//Iteracion de las columnas.
 	for (k = 0; k<n ; k++){
 
 		aux = (((tMatris *)A)->arreglo)[k];
@@ -325,7 +415,7 @@ void* transponer(void* A){
 		if (pt == NULL) continue;
 
 		else{
-
+			//Iteracion de las filas.
 			while (pt != NULL){
 
 				i = pt-> i;
@@ -345,10 +435,18 @@ void* transponer(void* A){
 
 
 
-
-
 	return resultado;
 }
+
+/******** Funcion: diagonal ********************
+Descripcion: Encuentra la diagonal principal de una matriz dada.
+
+Parametros:
+A: void.
+
+Retorno: Puntero a void con la matriz resultante luego de realizar la operacion.
+************************************************/
+
 void* diagonal(void* A){
 	void *resultado;
 	int n,m,k;
@@ -357,7 +455,7 @@ void* diagonal(void* A){
 	n = ((tMatris *)A)-> columnas;
 
 	resultado = alloc_dispersa(m,n);
-
+	//En el caso para matrices cuadradas y no cuadradas con mas filas que columnas.
 	if (m>= n){
 		for (k = 0;k<n; k++){
 			valor = encontrar_valor(A,k,k);
@@ -367,6 +465,7 @@ void* diagonal(void* A){
 		return resultado;
 
 	}
+	//En el caso para no cuadradas con mas columnas que filas.
 	else{
 		for (k = 0;k<m; k++){
 			valor = encontrar_valor(A,k,k);
@@ -380,6 +479,15 @@ void* diagonal(void* A){
 
 
 }
+
+/******** Funcion: unaria ********************
+Descripcion: Efectua una funcion unaria sobre una matrices.
+Parametros:
+*fun(void*): Puntero a funcion.
+A: void.
+Retorno: No retorna parametro.
+************************************************/
+
 void unaria(void* (*fun)(void*), void* A){
 	void * c;
 
@@ -389,6 +497,16 @@ void unaria(void* (*fun)(void*), void* A){
 	free_dispersa(c);
 
 }
+
+/******** Funcion: element_wise_op ********************
+Descripcion: Efectua una funcion sobre cada elemento de la matriz.
+
+Parametros:
+*fun(int): Puntero a funcion.
+A: void.
+
+Retorno: Puntero a void con la matriz resultante luego de realizar la operacion.
+************************************************/
 
 void* element_wise_op(int (*fun)(int), void* A){
 	int m,n;
@@ -401,7 +519,7 @@ void* element_wise_op(int (*fun)(int), void* A){
 	n = ((tMatris *)A)-> columnas;
 
 	resultado = alloc_dispersa(m,n);
-
+	//Iteracion sobre cada elemento de la matriz.
 	for (k = 0;k < n; k++){
 		for(u = 0; u<m; u++){
 
