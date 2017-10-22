@@ -34,3 +34,9 @@ int encontrar_valor(void* A, int i, int j){
 	}
 	
 }
+
+int agregar(int a){
+
+	return a + 1;
+
+}
