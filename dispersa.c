@@ -349,3 +349,43 @@ void* transponer(void* A){
 
 	return resultado;
 }
+void* diagonal(void* A){
+	void *resultado;
+	int n,m,k;
+	int valor;
+	m = ((tMatris *)A)-> filas;
+	n = ((tMatris *)A)-> columnas;
+
+	resultado = alloc_dispersa(m,n);
+
+	if (m>= n){
+		for (k = 0;k<n; k++){
+			valor = encontrar_valor(A,k,k);
+			ingresar_valor(resultado,k,k,valor);
+
+		}
+		return resultado;
+
+	}
+	else{
+		for (k = 0;k<m; k++){
+			valor = encontrar_valor(A,k,k);
+			ingresar_valor(resultado,k,k,valor);
+
+		}
+		return resultado;
+
+	}
+
+
+
+}
+void unaria(void* (*fun)(void*), void* A){
+	void * c;
+
+	c = (*fun)(A);
+
+	imprimir_matriz(c);
+	free_dispersa(c);
+
+}
