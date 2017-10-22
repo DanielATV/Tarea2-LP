@@ -237,39 +237,12 @@ void* suma(void*A,void*B){
 
 			while (pt != NULL){
 
-				for (u = 0; u<n ; u++){
 
-					aux2 = (((tMatris *)B)->arreglo)[u];
-
-					pt2 = aux2.sig;
-
-					if (pt2 == NULL) continue;
-
-					else{
-						while (pt2 != NULL){
-
-							if (pt->i == pt2-> i && pt->j == pt2->j ){
-
-								valor = pt->valor + pt2->valor;
+				valor = pt->valor;
+				valor = valor + encontrar_valor(B,pt->i,pt->j);
+				ingresar_valor(resultado,pt->i,pt->j,valor);
 
 
-								ingresar_valor(resultado,pt->i,pt->j,valor);
-
-								break;
-
-
-							}
-								
-							ptaux2 = pt2 -> sig;
-							pt2 = ptaux2;
-						
-						}
-						ingresar_valor(resultado,pt->i,pt->j,pt->valor);
-
-					}
-
-				}
-				
 				ptaux = pt -> sig;
 				pt = ptaux;
 
@@ -321,3 +294,11 @@ void* multiplicacion(void*A,void*B){
 
 }
 
+void binaria(void* (*fun)(void*,void*), void* A, void* B){
+	void * c;
+
+	c = (*fun)(A,B);
+
+	imprimir_matriz(c);
+	free_dispersa(c);
+}
