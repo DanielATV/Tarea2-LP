@@ -255,6 +255,8 @@ void* suma(void*A,void*B){
 
 								ingresar_valor(resultado,pt->i,pt->j,valor);
 
+								break;
+
 
 							}
 								
@@ -262,6 +264,8 @@ void* suma(void*A,void*B){
 							pt2 = ptaux2;
 						
 						}
+						ingresar_valor(resultado,pt->i,pt->j,pt->valor);
+						
 					}
 
 				}
