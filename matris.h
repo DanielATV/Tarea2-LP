@@ -16,5 +16,6 @@ typedef struct matris{
 } tMatris;
 
 int encontrar_valor(void* A, int i, int j);
+int agregar(int a);
 
 #endif
