@@ -7,42 +7,61 @@ int main(){
 	void *a;
 	void *b;
 	void *c;
+
+
+
 	
 
 	a = alloc_dispersa(2, 2);
 	b = alloc_dispersa(2, 2);
 
-
-	ingresar_valor(a,1,1,1);
+	printf("Primera matris\n");
+	ingresar_valor(a,1,1,2);
 	ingresar_valor(a,0,1,1);
 	ingresar_valor(a,0,0,1);
-	ingresar_valor(a,1,0,1);
+	ingresar_valor(a,1,0,2);
 
 	imprimir_matriz(a);
 
 	printf("----------------\n");
+	printf("Segunda matris\n");
 
 	ingresar_valor(b,1,1,2);
-	ingresar_valor(b,0,1,0);
-	ingresar_valor(b,0,0,0);
 	ingresar_valor(b,1,0,2);
 
 
 	imprimir_matriz(b);
 
 	printf("----------------\n");
+	printf("Multiplicacion\n");
 
 
-	c = multiplicacion(a,b);
+	binaria(&multiplicacion,a,b);
+	printf("----------------\n");
+	printf("Suma\n");
+	binaria(&suma,a,b);
+
+	printf("----------------\n");
+	printf("Traspuesta de la primera\n");
+
+	c = transponer(a);
 
 	imprimir_matriz(c);
 
 
 
 
+
+
+	
+
+
+
+
+
 	free_dispersa(a);
 	free_dispersa(b);
-	free_dispersa(c);
+
 
 
 
