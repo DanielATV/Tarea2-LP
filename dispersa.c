@@ -278,9 +278,46 @@ void* suma(void*A,void*B){
 		}
 	}
 
+	return resultado;
 
+}
+
+void* multiplicacion(void*A,void*B){
+	void *resultado;
+	int m,n;
+	int h,l;
+	int k,u,o;
+	int valor;
+	valor = 0;
+
+
+	m = ((tMatris *)A)->filas;
+	n = ((tMatris *)A)->columnas;
+
+	h = ((tMatris *)B)->filas;
+	l= ((tMatris *)B)->columnas;
+
+	if (n != h){
+		printf("Error de dimensiones\n");
+		exit(0);
+	}
+
+	resultado = alloc_dispersa(m,l);
+
+	for (k = 0; k< m; k++){
+
+		for (u = 0; u< l; u++){
+
+			for(o = 0; o< h; o++){
+				valor = valor + encontrar_valor(A,k,o)*encontrar_valor(B,o, u);
+			}
+			ingresar_valor(resultado,k,u,valor);
+			valor = 0;
+
+		}
+	}
 
 	return resultado;
 
-
 }
+
