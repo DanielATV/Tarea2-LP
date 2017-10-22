@@ -389,3 +389,29 @@ void unaria(void* (*fun)(void*), void* A){
 	free_dispersa(c);
 
 }
+
+void* element_wise_op(int (*fun)(int), void* A){
+	int m,n;
+	int k,u;
+	int valor;
+	void *resultado;
+
+
+	m = ((tMatris *)A)-> filas;
+	n = ((tMatris *)A)-> columnas;
+
+	resultado = alloc_dispersa(m,n);
+
+	for (k = 0;k < n; k++){
+		for(u = 0; u<m; u++){
+
+			valor = encontrar_valor(A,u,k);
+			valor = (*fun)(valor);
+			ingresar_valor(resultado,u,k,valor);
+		}
+	}
+
+	return resultado;
+
+
+}
