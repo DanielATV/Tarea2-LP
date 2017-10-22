@@ -6,11 +6,6 @@
 int main(){
 	void *a;
 	void *b;
-	void *c;
-
-
-
-	
 
 	a = alloc_dispersa(2, 2);
 	b = alloc_dispersa(2, 2);
@@ -44,9 +39,12 @@ int main(){
 	printf("----------------\n");
 	printf("Traspuesta de la primera\n");
 
-	c = transponer(a);
+	unaria(&transponer,a);
 
-	imprimir_matriz(c);
+	printf("----------------\n");
+	printf("Diagonal de la primera\n");
+
+	unaria(&diagonal,a);
 
 
 
@@ -61,7 +59,7 @@ int main(){
 
 	free_dispersa(a);
 	free_dispersa(b);
-
+	return 0;
 
 
 
