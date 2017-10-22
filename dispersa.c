@@ -198,3 +198,85 @@ void imprimir_matriz(void* A){
 	}
 
 }
+
+void* suma(void*A,void*B){
+	void *resultado;
+	int m,n;
+	int h,l;
+	tNodo aux,aux2;
+	tNodo *ptaux;
+	tNodo *ptaux2;
+	int k,u;
+	tNodo *pt;
+	tNodo *pt2;
+	int valor;
+
+
+	m = ((tMatris *)A)->filas;
+	n = ((tMatris *)A)->columnas;
+
+	h = ((tMatris *)B)->filas;
+	l= ((tMatris *)B)->columnas;
+
+	if (m != h || n != l){
+		printf("Error de dimensiones\n");
+		exit(0);
+	}
+
+	resultado = alloc_dispersa(m,n);
+
+	for (k = 0; k<n ; k++){
+
+		aux = (((tMatris *)A)->arreglo)[k];
+
+		pt = aux.sig;
+
+		if (pt == NULL) continue;
+
+		else{
+
+			while (pt != NULL){
+
+				for (u = 0; u<n ; u++){
+
+					aux2 = (((tMatris *)B)->arreglo)[u];
+
+					pt2 = aux2.sig;
+
+					if (pt2 == NULL) continue;
+
+					else{
+						while (pt2 != NULL){
+
+							if (pt->i == pt2-> i && pt->j == pt2->j ){
+
+								valor = pt->valor + pt2->valor;
+
+
+								ingresar_valor(resultado,pt->i,pt->j,valor);
+
+
+							}
+								
+							ptaux2 = pt2 -> sig;
+							pt2 = ptaux2;
+						
+						}
+					}
+
+				}
+				
+				ptaux = pt -> sig;
+				pt = ptaux;
+
+			}
+
+		}
+	}
+
+	imprimir_matriz(resultado);
+
+	return resultado;
+
+
+}
