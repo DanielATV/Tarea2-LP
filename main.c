@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dispersa.h"
+#include "matris.h"
 
 
 int main(){
 	void *a;
 	void *b;
+	void *c;
 
 	a = alloc_dispersa(2, 2);
 	b = alloc_dispersa(2, 2);
@@ -23,6 +25,8 @@ int main(){
 
 	ingresar_valor(b,1,1,2);
 	ingresar_valor(b,1,0,2);
+	ingresar_valor(b,1,0,0);
+
 
 
 	imprimir_matriz(b);
@@ -46,19 +50,19 @@ int main(){
 
 	unaria(&diagonal,a);
 
+	printf("----------------\n");
+	printf("Sumarle 1 a todos los elementor de la segunda\n");
 
+	c = element_wise_op(&agregar, b);
 
-
-
+	imprimir_matriz(c);
 
 	
 
 
-
-
-
 	free_dispersa(a);
 	free_dispersa(b);
+	free_dispersa(c);
 	return 0;
 
 
