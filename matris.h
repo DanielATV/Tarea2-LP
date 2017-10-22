@@ -15,4 +15,6 @@ typedef struct matris{
 	tNodo *arreglo;
 } tMatris;
 
+int encontrar_valor(void* A, int i, int j);
+
 #endif
