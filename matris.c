@@ -19,14 +19,15 @@ int encontrar_valor(void* A, int i, int j){
 	tNodo aux;
 	int valor;
 	valor = 0;
-
+	// Va a la columna j de la matriz.
 	aux = (((tMatris *)A)->arreglo)[j];
 	pt = aux.sig;
-
+	
+	// Si esta vacia retorna 0.
 	if (pt == NULL) return valor;
 
 	else{
-
+		//Itera sobre los elementos de la columna.
 		while (pt != NULL){
 
 			if(pt->i == i){
@@ -41,6 +42,7 @@ int encontrar_valor(void* A, int i, int j){
 			ptaux = pt -> sig;
 			pt = ptaux;
 		}
+		//Si no lo encuentra retorna 0.
 		return valor;
 	}
 	
